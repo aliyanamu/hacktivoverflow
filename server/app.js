@@ -16,15 +16,11 @@ let PORT = 3000 || PORT;
 
 //Connecting to Mongoose
 const mongoose   = require('mongoose'),
-      urltest = `mongodb://localhost:27017/hackover-test`
-      // url = `mongodb://illion01:illion01@ds213183.mlab.com:13183/hackover`;
+      // urltest = `mongodb://localhost:27017/hackover-test`
+      url = `mongodb://illion01:illion01@ds213183.mlab.com:13183/hackover`;
 
-// if (process.env.NODE_ENV === 'test') {
-    console.log('ready to test our server')
-    mongoose.connect(urltest,{ useNewUrlParser: true });
-// } else {
-//     mongoose.connect(url,{ useNewUrlParser: true });
-// }
+console.log('ready to test our server')
+mongoose.connect(url,{ useNewUrlParser: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

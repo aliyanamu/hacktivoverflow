@@ -39,7 +39,7 @@ export default {
       email: '',
       password: '',
       notifs: [],
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
   methods: {

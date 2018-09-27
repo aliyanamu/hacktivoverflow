@@ -18,7 +18,7 @@ export default {
       question: '',
       author: '',
       notif: '',
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
   methods: {

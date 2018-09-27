@@ -52,7 +52,7 @@ export default {
       inputans: '',
       answers: this.question.answer,
       notif: '',
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
   methods: {
@@ -68,7 +68,7 @@ export default {
     submitAnswer () {
       axios({
         method: 'POST',
-        url: `http://localhost:3000/answers/add/${this.$route.params.id}`,
+        url: `https://viktifoverflow-server.hanabc.xyz/answers/add/${this.$route.params.id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -95,8 +95,14 @@ export default {
     ...mapState([
       'questions',
       'question',
-      'self'
+      'self',
+      'voteAnsCount'
     ])
+  },
+  watch: {
+    voteAnsCount () {
+      this.getQuestionById()
+    }
   }
 }
 </script>

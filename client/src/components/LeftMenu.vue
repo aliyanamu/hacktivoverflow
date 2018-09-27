@@ -42,7 +42,7 @@ export default {
     return {
       notif: '',
       // self: '',
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
   props: ['isLogin'],
@@ -79,8 +79,14 @@ export default {
     ...mapState([
       'questions',
       'question',
-      'self'
+      'self',
+      'voteCount'
     ])
+  },
+  watch: {
+    voteCount () {
+      this.getQuestions()
+    }
   }
 }
 </script>

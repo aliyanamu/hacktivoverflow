@@ -8,7 +8,9 @@ export default new Vuex.Store({
   state: {
     questions: [],
     question: {},
-    self: {}
+    self: {},
+    voteCount: '',
+    voteAnsCount: ''
   },
   mutations: {
     setQuestions (state, payload) {
@@ -19,12 +21,18 @@ export default new Vuex.Store({
     },
     setSelf (state, payload) {
       state.self = payload
+    },
+    setVoteCount (state, payload) {
+      state.voteCount = payload
+    },
+    setVoteAnsCount (state, payload) {
+      state.voteAnsCount = payload
     }
   },
   actions: {
     getSelf (context) {
       axios
-        .get('http://localhost:3000/users/self', {
+        .get('https://viktifoverflow-server.hanabc.xyz/users/self', {
           headers: {
             token: localStorage.getItem('token')
           }
@@ -39,7 +47,7 @@ export default new Vuex.Store({
     },
     getQuestionById (context, id) {
       axios
-        .get(`http://localhost:3000/questions/${id}`)
+        .get(`https://viktifoverflow-server.hanabc.xyz/questions/${id}`)
         .then(response => {
           context.commit('setQuestionById', response.data.question)
         })
@@ -49,7 +57,7 @@ export default new Vuex.Store({
     },
     getQuestions (context) {
       axios
-        .get('http://localhost:3000/questions/all', {
+        .get('https://viktifoverflow-server.hanabc.xyz/questions/all', {
           headers: {
             token: localStorage.getItem('token')
           }
@@ -71,13 +79,14 @@ export default new Vuex.Store({
     upvoteQuest (context, id) {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/questions/upvote/${id}`,
+        url: `https://viktifoverflow-server.hanabc.xyz/questions/upvote/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(response => {
           context.dispatch(`getQuestionById`, id)
+          context.commit('setVoteCount', response)
           this.$router.push(`/questions/${id}`)
         })
         .catch(err => {
@@ -87,13 +96,14 @@ export default new Vuex.Store({
     downvoteQuest (context, id) {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/questions/downvote/${id}`,
+        url: `https://viktifoverflow-server.hanabc.xyz/questions/downvote/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(response => {
           context.dispatch(`getQuestionById`, id)
+          context.commit('setVoteCount', response)
           this.$router.push(`/questions/${id}`)
         })
         .catch(err => {
@@ -104,13 +114,14 @@ export default new Vuex.Store({
     upvoteAns (context, id) {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/answers/upvote/${id}`,
+        url: `https://viktifoverflow-server.hanabc.xyz/answers/upvote/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(response => {
           context.dispatch(`getQuestionById`, id)
+          context.commit('setVoteAnsCount', response)
           this.$router.push(`/answers/${id}`)
         })
         .catch(err => {
@@ -120,13 +131,14 @@ export default new Vuex.Store({
     downvoteAns (context, id) {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/answers/downvote/${id}`,
+        url: `https://viktifoverflow-server.hanabc.xyz/answers/downvote/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(response => {
           context.dispatch(`getQuestionById`, id)
+          context.commit('setVoteAnsCount', response)
           this.$router.push(`/answers/${id}`)
         })
         .catch(err => {

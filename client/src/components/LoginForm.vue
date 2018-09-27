@@ -33,25 +33,25 @@ import axios from 'axios'
 export default {
   name: 'LoginForm',
   props: ['isLogin'],
-  data() {
+  data () {
     return {
       isOpen: false,
       email: '',
       password: '',
       notif: '',
-      baseUrl: 'http://localhost:3000'
+      baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
   methods: {
-    openbtn() {
+    openbtn () {
       this.isOpen = true
     },
-    closebtn() {
+    closebtn () {
       this.isOpen = false
       this.password = null
       this.email = null
     },
-    googleSignIn() {
+    googleSignIn () {
       let baseProvider = new firebase.auth.GoogleAuthProvider()
       firebase
         .auth()
@@ -67,17 +67,17 @@ export default {
             url: this.baseUrl + `/users/google-signup`,
             data
           })
-            .then(function(response) {
+            .then(function (response) {
               let token = response.data.token
               localStorage.setItem('token', token)
               window.location.reload()
             })
         })
         .catch(err => {
-          console.log('failed login')
+          console.log('failed login', err.response)
         })
     },
-    signIn() {
+    signIn () {
       let self = this
       self.notif = ''
       let data = {
@@ -89,7 +89,7 @@ export default {
         url: this.baseUrl + `/users/login`,
         data
       })
-        .then(function(response) {
+        .then(function (response) {
           console.log(response)
           let token = response.data.token
           localStorage.setItem('token', token)
@@ -97,7 +97,7 @@ export default {
           self.closebtn()
           self.$router.push('/')
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (!self.email) {
             self.notif = 'valid email is required'
           } else if (!self.password) {
@@ -110,7 +110,7 @@ export default {
           console.log('failed login')
         })
     },
-    logout() {
+    logout () {
       firebase
         .auth()
         .signOut()

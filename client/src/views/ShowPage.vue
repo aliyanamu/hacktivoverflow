@@ -87,9 +87,10 @@ export default {
     }
   },
   mounted () {
-    if(this.$route.params.id !== undefined){
+    if (this.$route.params.id !== undefined) {
       this.getQuestionById(this.$route.params.id)
     }
+    this.getSelf()
   },
   computed: {
     ...mapState([
@@ -101,7 +102,7 @@ export default {
   },
   watch: {
     voteAnsCount () {
-      this.getQuestionById()
+      this.$router.push(`/dashboard`)
     }
   }
 }

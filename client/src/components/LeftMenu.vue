@@ -41,7 +41,6 @@ export default {
   data () {
     return {
       notif: '',
-      // self: '',
       baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
@@ -74,6 +73,7 @@ export default {
   },
   mounted () {
     this.getQuestions()
+    this.getSelf()
   },
   computed: {
     ...mapState([

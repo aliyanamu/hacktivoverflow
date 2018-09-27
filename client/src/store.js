@@ -120,9 +120,9 @@ export default new Vuex.Store({
         }
       })
         .then(response => {
-          context.dispatch(`getQuestionById`, id)
+          // context.dispatch(`getQuestionById`, id)
           context.commit('setVoteAnsCount', response)
-          this.$router.push(`/answers/${id}`)
+          this.$router.push(`/dashboard`)
         })
         .catch(err => {
           console.log('get error', err.response)
@@ -137,9 +137,9 @@ export default new Vuex.Store({
         }
       })
         .then(response => {
-          context.dispatch(`getQuestionById`, id)
+          // context.dispatch(`getQuestionById`, id)
           context.commit('setVoteAnsCount', response)
-          this.$router.push(`/answers/${id}`)
+          this.$router.push(`/dashboard`)
         })
         .catch(err => {
           console.log('get error', err.response)

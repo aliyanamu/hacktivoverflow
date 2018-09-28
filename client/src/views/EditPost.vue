@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <h1 class="title">Ask your question!</h1>
+    <h1 class="title">You are now editing your question...</h1>
     <input id="title" v-model="title" type="text" name="title" placeholder="Input title here">
     <wysiwyg v-model="question" style="border: 1px solid dimgrey" />
     <button @click="editPost">Edit</button>
@@ -15,6 +15,7 @@ export default {
   data () {
     return {
       title: '',
+      id: this.$route.params.id,
       question: '',
       author: '',
       notif: '',
@@ -46,7 +47,7 @@ export default {
         }
       })
         .then(response => {
-          console.log('update', response)
+          this.$store.dispatch('getQuestions')
           this.$router.push('/dashboard')
         })
         .catch(err => {
@@ -56,8 +57,6 @@ export default {
   },
   created () {
     this.firstInput()
-  },
-  computed: {
   }
 }
 </script>

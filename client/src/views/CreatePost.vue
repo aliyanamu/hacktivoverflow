@@ -21,6 +21,7 @@ export default {
       baseUrl: 'https://viktifoverflow-server.hanabc.xyz'
     }
   },
+  props: ['isLogin'],
   methods: {
     createPost () {
       axios({
@@ -35,9 +36,8 @@ export default {
         }
       })
         .then(response => {
-          console.log('success', response)
+          this.$store.dispatch('getQuestions')
           this.$router.push('/dashboard')
-          this.$router.go()
         })
         .catch(err => {
           console.log('get error', err.response)

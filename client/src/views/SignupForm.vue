@@ -2,7 +2,7 @@
   <div>
     <div class="logBox">
       <div class="form">
-        <div style="color: red" v-if="this.notifs.length > 0">Oops, 
+        <div style="color: red" v-if="this.notifs.length > 0">Oops,
           <span v-for="(notif, index) in notifs" :key="index">
             <span v-if="index !== notifs.length-1">{{ notif }}, </span>
             <span v-else>{{ notif }}</span>
@@ -29,7 +29,7 @@
 <script>
 import axios from 'axios'
 import firebase from 'firebase'
-import db from '../assets/config.js'
+import db from '../config.js'
 
 export default {
   name: 'SignupForm',
@@ -43,7 +43,7 @@ export default {
     }
   },
   methods: {
-    register() {
+    register () {
       let self = this
       let data = {
         name: this.name,

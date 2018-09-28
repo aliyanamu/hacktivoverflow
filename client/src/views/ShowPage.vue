@@ -14,8 +14,8 @@
       <span><h4>{{question.vote}}</h4> votes</span>
       <button @click="downvoteQuest(question._id)"><i class="fa fa-chevron-down fa-2x"></i></button>
     </span>
-    <wysiwyg v-model="inputans" style="border: 1px solid dimgrey" />
-    <button class="subut" @click="submitAnswer">Answer</button>
+    <wysiwyg v-if="isLogin" v-model="inputans" style="border: 1px solid dimgrey" />
+    <button v-if="isLogin" class="subut" @click="submitAnswer">Answer</button>
     <div class="comment-list" v-for="item in question.answer" :key="item._id">
       <hr>
       <div class="commentes">

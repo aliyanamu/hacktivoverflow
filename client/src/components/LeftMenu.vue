@@ -1,6 +1,6 @@
 <template>
   <div class="title-list">
-    <router-link :to='{name:"creates"}' v-if="self"><button class="add">+</button></router-link>
+    <router-link :to='{name:"creates"}' v-if="isLogin"><button class="add">+</button></router-link>
     <h1 v-if="questions.length === 0">No Question</h1>
     <ul v-else>
       <li v-if="questions" v-for="question in questions" :key="question._id">
@@ -17,7 +17,7 @@
                   </span>
                 </div>
                 <div>
-                  <p class="desc">{{ question.question.substring(0, 88) }}</p>
+                  <p class="desc">{{ question.question }}</p>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default {
           }
         })
         .then(response => {
-          console.log('delete success')
+          this.$store.dispatch('getQuestions')
           this.$router.push('/dashboard')
         })
         .catch(err => {
@@ -80,11 +80,15 @@ export default {
       'questions',
       'question',
       'self',
-      'voteCount'
+      'voteCount',
+      'updQuest'
     ])
   },
   watch: {
     voteCount () {
+      this.getQuestions()
+    },
+    updQuest () {
       this.getQuestions()
     }
   }

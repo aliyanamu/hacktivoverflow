@@ -1,19 +1,18 @@
 <template>
   <div id="app">
     <div id="nav">
-      <!-- <button @click="check">Y</button> -->
       <router-link to="/">Home</router-link> ||
       <router-link to="/dashboard">Dashboard</router-link>
       <login-form :isLogin="isLogin" @logStat="unLog"></login-form>
     </div>
-    <router-view/>
+    <router-view :isLogin="isLogin"/>
   </div>
 </template>
 
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
 import LoginForm from '@/components/LoginForm.vue'
-import db from './assets/config.js'
+import db from './config.js'
 import firebase from 'firebase'
 
 export default {

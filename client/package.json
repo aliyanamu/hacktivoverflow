@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "config.js": "^0.1.0",
     "firebase": "^5.5.1",
     "router": "^1.3.3",
     "vue": "^2.5.17",

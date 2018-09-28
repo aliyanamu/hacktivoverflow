@@ -10,7 +10,8 @@ export default new Vuex.Store({
     question: {},
     self: {},
     voteCount: '',
-    voteAnsCount: ''
+    voteAnsCount: '',
+    updQuest: 0
   },
   mutations: {
     setQuestions (state, payload) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     setVoteAnsCount (state, payload) {
       state.voteAnsCount = payload
+    },
+    setUpdQuest (state, payload) {
+      state.updQuest = payload
     }
   },
   actions: {
@@ -63,6 +67,7 @@ export default new Vuex.Store({
           }
         })
         .then(response => {
+          console.log(response)
           response.data.questions.sort(function (a, b) {
             let keyA = a.vote
             let keyB = b.vote

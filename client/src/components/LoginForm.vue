@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button v-if="isLogin === false" class="g-btn" @click="googleSignIn">G</button>
-    <button v-if="isLogin === false" class="plus-btn" @click="openbtn"><i style="width: 30%; float: left; margin-left: 20%;" class="fas fa-sign-in-alt"></i></button>
-    <button v-if="isLogin === true" class="plus-btn" @click="logout"><i style="width: 30%; float: left; margin-left: 20%;" class="fas fa-sign-out-alt"></i></button>
+    <button v-if="!isLogin" class="g-btn" @click="googleSignIn">G</button>
+    <button v-if="!isLogin" class="plus-btn" @click="openbtn"><i style="width: 30%; float: left; margin-left: 20%;" class="fas fa-sign-in-alt"></i></button>
+    <button v-else class="plus-btn" @click="logout"><i style="width: 30%; float: left; margin-left: 20%;" class="fas fa-sign-out-alt"></i></button>
     <div v-if="isOpen === true">
     <div class="overlay"></div>
       <div class="logBox">
@@ -27,7 +27,7 @@
 
 <script>
 import firebase from 'firebase'
-import db from '../assets/config.js'
+import db from '../config.js'
 import axios from 'axios'
 
 export default {
@@ -57,7 +57,6 @@ export default {
         .auth()
         .signInWithPopup(baseProvider)
         .then(result => {
-          let token = result.user.X.O
           let data = {
             email: result.additionalUserInfo.profile.email,
             name: result.additionalUserInfo.profile.name
@@ -70,6 +69,7 @@ export default {
             .then(function (response) {
               let token = response.data.token
               localStorage.setItem('token', token)
+              self.$emit('logStat', true)
               window.location.reload()
             })
         })
@@ -165,6 +165,7 @@ export default {
   color: white;
   font-size: 30px;
   font-weight: bold;
+  z-index: 100;
 }
 
 .plus-btn {
